@@ -60,12 +60,12 @@ The model follows a **Transformer-based Encoder-Decoder** architecture. Below is
 |---------------------------------|---------------------------------|--------------|----------------|
 | **Embedding Layer**              | (batch_size, seq_len, d_model)   | N            | Converts input tokens into dense vector representations. |
 | **Positional Encoding**          | (batch_size, seq_len, d_model)   | 0            | Adds sequence order information to embeddings. |
-| **Transformer Encoder (N=6)**    | (batch_size, seq_len, d_model)   | N            | Stack of 6 self-attention and feed-forward layers. |
+| **Transformer Encoder (N=5)**    | (batch_size, seq_len, d_model)   | N            | Stack of 6 self-attention and feed-forward layers. |
 | **Multi-Head Attention**         | (batch_size, seq_len, d_model)   | N            | Allows focusing on multiple words at once. |
 | **Feed-Forward Network (FFN)**   | (batch_size, seq_len, d_model)   | N            | Applies non-linearity to improve learning. |
 | **Dropout**                      | (batch_size, seq_len, d_model)   | 0            | Prevents overfitting by randomly dropping units. |
 | **Layer Normalization**          | (batch_size, seq_len, d_model)   | 0            | Normalizes features to stabilize training. |
-| **Transformer Decoder (N=6)**    | (batch_size, seq_len, d_model)   | N            | Stack of 6 layers for sequence generation. |
+| **Transformer Decoder (N=5)**    | (batch_size, seq_len, d_model)   | N            | Stack of 6 layers for sequence generation. |
 | **Masked Multi-Head Attention**  | (batch_size, seq_len, d_model)   | N            | Prevents peeking at future words during decoding. |
 | **Encoder-Decoder Attention**    | (batch_size, seq_len, d_model)   | N            | Ensures the decoder attends to relevant encoder outputs. |
 | **Fully Connected Output Layer** | (batch_size, seq_len, vocab_size) | N           | Produces a probability distribution over vocabulary. |
@@ -74,7 +74,7 @@ The model follows a **Transformer-based Encoder-Decoder** architecture. Below is
 **Trainable Parameters**: ~50 Million  
 **Non-Trainable Parameters**: 0  
 
-The model consists of **6 encoder layers**, **6 decoder layers**, and **8 attention heads per layer**.
+The model consists of **5 encoder layers**, **5 decoder layers**, and **8 attention heads per layer**.
 
 ---
 
