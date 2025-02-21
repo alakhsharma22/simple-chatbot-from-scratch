@@ -12,7 +12,7 @@ EOS_TOKEN = "[EOS]"
 SEP_TOKEN = "[SEP]"
 UNK_TOKEN = "[UNK]"
 max_sequence_length = 40
-tokenizer = AutoTokenizer.from_pretrained("/home/postman/.Alakh/chatbot/bert-Tokenizer/cacheDir/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594")
+tokenizer = AutoTokenizer.from_pretrained("path_to_BERT_Tokenizer")
 special_tokens = {"additional_special_tokens": [SOS_TOKEN, EOS_TOKEN, SEP_TOKEN]}
 tokenizer.add_special_tokens(special_tokens)
 vocab = tokenizer.get_vocab()
@@ -115,7 +115,7 @@ class TransformerModel(nn.Module):
         output = self.fc_out(output)
         return output.transpose(0, 1)
 
-state_dict_path = "/home/postman/.Alakh/chatbot/new2/empathetic_transformer2.pt"
+state_dict_path = "path_for_saving_state/empathetic_transformer.pt"
 model = TransformerModel(vocab_size, d_model=256, nhead=4, num_encoder_layers=5, num_decoder_layers=5, dim_feedforward=512, dropout=0.1, max_len=max_sequence_length).to(device)
 model.load_state_dict(torch.load(state_dict_path, map_location=device))
 model.eval()
