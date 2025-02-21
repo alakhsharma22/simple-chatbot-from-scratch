@@ -8,7 +8,7 @@ import math
 from transformers import AutoTokenizer
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-file_path = "/home/postman/.Alakh/chatbot/emotion-emotion_69k.csv"
+file_path = "Dataset_path"
 df = pd.read_csv(file_path)
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 df = df[['Situation', 'emotion', 'empathetic_dialogues', 'labels']].dropna()
