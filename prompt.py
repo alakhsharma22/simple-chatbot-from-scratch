@@ -7,14 +7,12 @@ import math
 from transformers import AutoTokenizer
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 SOS_TOKEN = "[SOS]"
 EOS_TOKEN = "[EOS]"
 SEP_TOKEN = "[SEP]"
 UNK_TOKEN = "[UNK]"
 max_sequence_length = 40
-
-tokenizer = AutoTokenizer.from_pretrained("path_to_bert_tokenizer_config_file_on_local_system")
+tokenizer = AutoTokenizer.from_pretrained("/home/postman/.Alakh/chatbot/bert-Tokenizer/cacheDir/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594")
 special_tokens = {"additional_special_tokens": [SOS_TOKEN, EOS_TOKEN, SEP_TOKEN]}
 tokenizer.add_special_tokens(special_tokens)
 vocab = tokenizer.get_vocab()
@@ -117,12 +115,12 @@ class TransformerModel(nn.Module):
         output = self.fc_out(output)
         return output.transpose(0, 1)
 
-state_dict_path = "path_for_saving/empathetic_transformer_final.pt"
-model = TransformerModel(vocab_size, d_model=256, nhead=4, num_encoder_layers=6, num_decoder_layers=6, dim_feedforward=512, dropout=0.1, max_len=max_sequence_length).to(device)
+state_dict_path = "/home/postman/.Alakh/chatbot/new2/empathetic_transformer2.pt"
+model = TransformerModel(vocab_size, d_model=256, nhead=4, num_encoder_layers=5, num_decoder_layers=5, dim_feedforward=512, dropout=0.1, max_len=max_sequence_length).to(device)
 model.load_state_dict(torch.load(state_dict_path, map_location=device))
 model.eval()
 
-def generate_response(input_text, max_length=40, temperature=1.0, top_k=50, repetition_penalty=1.2):
+def generate_response(input_text, max_length=40, temperature=0.7, top_k=20, repetition_penalty=1.2):
     context = f"{SOS_TOKEN} {input_text} {SEP_TOKEN}"
     input_seq = texts_to_sequences(context)
     input_seq = pad_sequence(input_seq, max_length)
@@ -182,14 +180,14 @@ def beam_search_decoder(input_text, beam_width=5, max_len=max_sequence_length, l
     return generated_text.strip()
 
 def chat():
-    print("Chatbot is ready! Type 'exit' to stop.")
+    print("SARAH5 is ready! Type 'exit' to stop.")
     while True:
         user_input = input("You: ")
         if user_input.lower() == "exit":
-            print("Chatbot: Goodbye!")
+            print("SARAH5: Goodbye!")
             break
         response = generate_response(user_input)
-        print(f"Chatbot: {response}")
+        print(f"SARAH5: {response}")
 
 if __name__ == "__main__":
     chat()
