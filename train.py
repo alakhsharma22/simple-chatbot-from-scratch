@@ -22,7 +22,7 @@ sample_percentage = 1
 batch_size = 32
 epochs = 25
 patience = 100
-tokenizer = AutoTokenizer.from_pretrained("/home/postman/.Alakh/chatbot/bert-Tokenizer/cacheDir/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594")
+tokenizer = AutoTokenizer.from_pretrained("path_to_BERT_Uncased_Tokenizer")
 special_tokens = {"additional_special_tokens": [SOS_TOKEN, EOS_TOKEN, SEP_TOKEN]}
 tokenizer.add_special_tokens(special_tokens)
 
@@ -210,12 +210,12 @@ for epoch in range(epochs):
     if avg_val_loss < best_val_loss:
         best_val_loss = avg_val_loss
         trigger_times = 0
-        torch.save(model.state_dict(), "/home/postman/.Alakh/chatbot/new2/empathetic_transformer2.pt")
+        torch.save(model.state_dict(), "path_for_saving_state/empathetic_transformer.pt")
     else:
         trigger_times += 1
         if trigger_times >= patience:
             break
 
-model.load_state_dict(torch.load("/home/postman/.Alakh/chatbot/new2/empathetic_transformer2.pt"))
-torch.save(model.state_dict(), "/home/postman/.Alakh/chatbot/new2/empathetic_transformer_final2.pt")
-torch.save(model, "/home/postman/.Alakh/chatbot/new2/empathetic_transformer_full2.pth")
+model.load_state_dict(torch.load("path_for_saving_state/empathetic_transformer2.pt"))
+torch.save(model.state_dict(), "path_for_saving_state/empathetic_transformer_final2.pt")
+torch.save(model, "path_for_saving_state/empathetic_transformer_full2.pth")
